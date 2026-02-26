@@ -1,0 +1,111 @@
+/*
+<--!----------------------------------------------------------------!-->
+<--! Projects !-->
+<--!----------------------------------------------------------------!-->
+*/
+#projectList {
+	.single-item {
+		&:hover {
+			.project-name-td {
+				.project-list-action {
+					opacity: 1;
+					visibility: visible;
+					transition: all 0.3s ease;
+				}
+				.project-list-desc {
+					opacity: 0;
+					visibility: hidden;
+					transition: all 0.3s ease;
+				}
+			}
+		}
+		.project-name-td {
+			width: 400px;
+			white-space: normal;
+			.project-list-action {
+				opacity: 0;
+				visibility: hidden;
+				position: relative;
+				top: -40px;
+				padding-top: 5px;
+				margin-bottom: -35px;
+				background-color: transparent;
+				transition: all 0.3s ease;
+			}
+			.tickets-list-action {
+				opacity: 0;
+				visibility: hidden;
+				transition: all 0.3s ease;
+			}
+			.project-list-desc {
+				opacity: 1;
+				visibility: visible;
+				transition: all 0.3s ease;
+			}
+		}
+	}
+}
+
+.project-info-premium {
+	.project-info-title {
+		letter-spacing: -0.015em;
+		line-height: 1.15;
+	}
+
+	.project-info-label {
+		letter-spacing: 0.08em;
+	}
+
+	.cam-icon-wrap {
+		width: 28px;
+		height: 28px;
+		border-radius: 7px;
+		flex-shrink: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(2, 6, 23, 0.06);
+		color: rgba(2, 6, 23, 0.78);
+	}
+
+	.project-info-value {
+		line-height: 1.55;
+	}
+
+	.project-info-description {
+		white-space: pre-wrap;
+	}
+
+	.img-group {
+		.avatar-image.cam-logo-circle,
+		.avatar-text.cam-logo-circle {
+			background: var(--bs-secondary-bg) !important;
+			border: 2px solid var(--bs-border-color) !important;
+			color: var(--bs-body-color) !important;
+		}
+
+		.avatar-image.cam-logo-circle img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+html.app-skin-dark {
+	.project-info-premium {
+		.cam-icon-wrap {
+			background: rgba(255, 255, 255, 0.08) !important;
+			color: rgba(255, 255, 255, 0.75) !important;
+		}
+
+		.img-group {
+			.avatar-image.cam-logo-circle,
+			.avatar-text.cam-logo-circle {
+				background: rgba(255, 255, 255, 0.08) !important;
+				border: 0 !important;
+				color: rgba(226, 232, 240, 0.92) !important;
+			}
+		}
+	}
+}

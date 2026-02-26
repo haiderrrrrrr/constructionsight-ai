@@ -1,0 +1,15 @@
+artifact_uri: file:///H:/ConstructionSight-AI/backend/app/ml/models/yolo_ppe/mlflow/145608455651474544/1c14c96de3b64be0845847ec2664119e/artifacts
+end_time: 1774694990956
+entry_point_name: ''
+experiment_id: '145608455651474544'
+lifecycle_stage: active
+run_id: 1c14c96de3b64be0845847ec2664119e
+run_name: ppe_stage2_PHASE1
+run_uuid: 1c14c96de3b64be0845847ec2664119e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1774694630549
+status: 3
+tags: []
+user_id: haide

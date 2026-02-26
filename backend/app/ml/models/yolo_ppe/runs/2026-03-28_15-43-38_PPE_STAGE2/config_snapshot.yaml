@@ -1,0 +1,18 @@
+batch: 32
+classes:
+- helmet
+- vest
+- Person
+crop_counts:
+  0: 1484
+  1: 1586
+  2: 1758
+epochs_phase1: 50
+epochs_phase2: 150
+gpu: NVIDIA GeForce RTX 4060 Laptop GPU
+imgsz: 224
+model: yolo11s
+stage: Stage 2 crop PPE detector
+total_crops: 1758
+violation_logic: 'derived at inference: no helmet/vest in crop = violation'
+vram_gb: 8.6

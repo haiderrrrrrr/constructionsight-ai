@@ -1,0 +1,122 @@
+================================================================================
+CONSTRUCTIONSIGHT-AI — ML STREAM FIXES LOG
+================================================================================
+
+--------------------------------------------------------------------------------
+FIX: Multi-person detection — unconfirmed ByteTrack persons silently skipped
+FILE: backend/app/api/routes/ml_stream_enterprise.py  (line ~1003)
+DATE: 2026-04-07
+--------------------------------------------------------------------------------
+
+SYMPTOM:
+  When 2-3 people are in frame, newly entered persons had no bounding box for
+  5-6 seconds. The first person already tracked fine; additional persons were
+  invisible until ByteTrack confirmed their track.
+
+ROOT CAUSE:
+  ByteTrack assigns a track ID only after a detection survives its internal
+  confirmation threshold (typically 1-3 consecutive frames). Until confirmed,
+  box.id is None. The previous code did:
+
+      track_id = int(box.id[0]) if box.id is not None else None
+      if track_id is None:
+          continue   ← silently skipped — no box drawn, no PPE check
+
+  This is different from run5.py (webcam script) because the enterprise version
+  runs a reader thread + inferencer thread. The inferencer always picks up the
+  LATEST frame, skipping intermediate frames. ByteTrack needs consecutive frames
+  to confirm tracks; skipped frames mean more unconfirmed (id=None) detections.
+
+FIX APPLIED:
+  Replace the silent skip with a temporary negative ID:
+
+      track_id = int(box.id[0]) if box.id is not None else -(i + 1)
+
+  - Negative IDs never collide with ByteTrack positive IDs (1, 2, 3...)
+  - Unconfirmed person is drawn immediately as CHECKING state
+  - ReID is NOT assigned (quality gate + reid_min_pending_frames=4 prevents it)
+  - When ByteTrack confirms the track 1-2 frames later, the negative-ID
+    PersonTrack falls out of seen_ids and is cleaned up; real positive ID
+    takes over seamlessly
+
+NOTE:
+  This bug was NOT caused by the FP16 (half=True) or cuDNN benchmark additions.
+  Those optimisations are correct and should remain enabled.
+
+================================================================================
+
+--------------------------------------------------------------------------------
+FIX: Multi-camera ByteTrack state corruption
+FILE: backend/app/api/routes/ml_stream_enterprise.py
+DATE: 2026-04-07
+--------------------------------------------------------------------------------
+
+SYMPTOM:
+  With 2+ cameras running simultaneously, persons across cameras interfere with
+  each other's tracking. Only 1 person tracked at a time across all cameras
+  combined. Track IDs constantly reset. ReID/Global ID never stabilises because
+  embeddings never accumulate enough frames before the track resets.
+
+ROOT CAUSE:
+  _stage1 is a module-level YOLO singleton shared across all camera inferencer
+  threads. _stage1.track(persist=True) stores ByteTrack state inside
+  predictor.trackers[0] — a single tracker instance. When Camera A and Camera B
+  call .track() concurrently, their frames interleave into the same tracker.
+  ByteTrack sees a completely different scene each frame and loses all tracks.
+
+FIX APPLIED:
+  1. Added _camera_bytetrackers dict — one BYTETracker instance per camera_id.
+  2. Added _get_or_create_bytetracker(camera_id) helper that lazily creates a
+     fresh BYTETracker(bytetrack.yaml, frame_rate=30) per camera.
+  3. Replaced _stage1.track() with _stage1.predict() (stateless GPU call) +
+     bt.update(r1[0].boxes, frame) using the per-camera tracker.
+  4. Tracker output (numpy array rows [x1,y1,x2,y2,track_id,score,cls,idx])
+     replaces the old boxes1 YOLO object — iteration updated to use row[0..4].
+  5. Per-camera tracker cleaned up in _reader disconnect handler alongside
+     _camera_captures and _camera_track_registries.
+
+RESULT:
+  - _stage1 GPU model stays shared (correct — one GPU model for all cameras)
+  - ByteTrack state is fully isolated per camera
+  - Track IDs are stable within each camera independently
+  - ReID embeddings accumulate correctly → Global IDs assigned reliably
+  - Cross-camera Global ID matching still works via shared _shared_faiss_manager
+
+================================================================================
+
+--------------------------------------------------------------------------------
+FIX: Everyone assigned same Global ID (G-0) — FAISS index never rebuilt in time
+FILE: backend/app/api/routes/ml_stream_enterprise.py
+DATE: 2026-04-07
+--------------------------------------------------------------------------------
+
+SYMPTOM:
+  Every person on every camera was assigned G-0 (or G-0, G-1, G-2 sequentially
+  with no matching). Even a male and female with completely different clothes got
+  the same Global ID.
+
+ROOT CAUSE:
+  faiss_manager.flush_if_dirty() was called OUTSIDE the _shared_reid_lock block
+  (line 1188), after the lock was already released. This means:
+
+  1. Person A: assign() runs inside lock → _new_id() → G-0 assigned, _dirty=True
+     but index NOT yet rebuilt (flush happens after lock exits).
+  2. Person B: assign() runs next, still inside same lock iteration → index.ntotal
+     is still 0 (rebuild hasn't happened yet) → _new_id() → G-1, no matching.
+  3. Same problem for multi-person same-frame: all people process sequentially
+     inside the lock but the index is never rebuilt between them, so every person
+     always sees ntotal==0 and gets a new ID without any FAISS search happening.
+
+  The assign_thresh comparison (0.72, 0.82, etc.) was NEVER reached because
+  index.ntotal==0 short-circuits to _new_id() before the search even runs.
+
+FIX APPLIED:
+  Added faiss_manager.flush_if_dirty() immediately after each assign() call,
+  INSIDE the _shared_reid_lock block. This rebuilds the FAISS index right after
+  Person A is registered, so Person B's assign() call sees ntotal > 0 and
+  performs an actual cosine similarity search.
+
+  The outer flush_if_dirty() at line ~1188 is kept as a no-op safety net
+  (already False after the inner call).
+
+================================================================================

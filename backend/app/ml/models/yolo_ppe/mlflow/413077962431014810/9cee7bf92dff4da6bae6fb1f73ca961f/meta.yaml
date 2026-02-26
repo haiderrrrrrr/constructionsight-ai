@@ -1,0 +1,15 @@
+artifact_uri: file:///E:/Downloads/ConstructionSight-AI/ConstructionSight-AI/backend/app/ml/models/yolo_ppe/mlflow/413077962431014810/9cee7bf92dff4da6bae6fb1f73ca961f/artifacts
+end_time: 1761795551895
+entry_point_name: ''
+experiment_id: '413077962431014810'
+lifecycle_stage: active
+run_id: 9cee7bf92dff4da6bae6fb1f73ca961f
+run_name: ppe_FINAL
+run_uuid: 9cee7bf92dff4da6bae6fb1f73ca961f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761786849365
+status: 3
+tags: []
+user_id: PC

@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Test Failures",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*AssertionError.*"
+  },
+  {
+    "name": "Broken Tests (Server Errors)",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*500.*|.*Internal Server Error.*"
+  },
+  {
+    "name": "Auth Failures",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*401.*|.*403.*|.*Unauthorized.*|.*Forbidden.*"
+  },
+  {
+    "name": "Database Errors",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*sqlalchemy.*|.*psycopg2.*|.*IntegrityError.*"
+  },
+  {
+    "name": "Timeout",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*TimeoutError.*|.*timed out.*"
+  },
+  {
+    "name": "Skipped Tests",
+    "matchedStatuses": ["skipped"]
+  }
+]

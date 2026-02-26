@@ -1,0 +1,108 @@
+# =============================================================
+# ⚙️ CORE BACKEND
+# =============================================================
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+aiofiles==25.1.0
+pydantic==2.9.0
+python-dotenv==1.0.1
+SQLAlchemy==2.0.35
+psycopg2-binary==2.9.9
+
+# =============================================================
+# 🔐 AUTHENTICATION & SECURITY
+# =============================================================
+fastapi-users[sqlalchemy2,oauth]==13.0.0
+argon2-cffi==23.1.0
+passlib==1.7.4
+python-jose[cryptography]==3.3.0
+cryptography==43.0.1
+email-validator==2.1.1
+slowapi==0.1.9
+requests==2.32.3
+chardet<6
+onvif-zeep==0.2.12           # ONVIF device discovery + stream URI fetching
+google-auth==2.35.0
+
+# =============================================================
+# 🧠 MACHINE LEARNING / COMPUTER VISION
+# =============================================================
+torch>=2.4.1              # PyTorch CUDA 12.x (auto-selects GPU)
+ultralytics==8.3.221      # YOLOv11/YOLOv8 unified models
+opencv-python==4.10.0.84  # Image/Video processing
+numpy==1.26.4
+pandas==2.2.3
+mlflow==2.14.0            # Experiment tracking
+scikit-learn==1.5.1
+hydra-core==1.3.2         # Config-driven training
+optuna==3.6.1             # Hyperparameter optimization
+# Optional for lightweight inference/deployment (can comment out if unused)
+onnxruntime-gpu==1.19.0   
+
+# =============================================================
+# ⚙️ ASYNC / PIPELINES
+# =============================================================
+celery==5.4.0
+redis==5.0.0
+flower==2.0.1
+apscheduler==3.10.4
+
+# =============================================================
+# 📊 REPORTING & VISUALIZATION
+# =============================================================
+papermill==2.5.0
+reportlab==4.2.0
+matplotlib==3.9.2
+weasyprint==62.1
+plotly==5.24.0
+
+# =============================================================
+# 🧩 LOGGING / MONITORING
+# =============================================================
+loguru==0.7.2
+prometheus-fastapi-instrumentator==6.1.0
+sentry-sdk[fastapi]==2.13.0
+
+# =============================================================
+# ☁️ CLOUD STORAGE
+# =============================================================
+cloudinary==1.41.0
+
+# =============================================================
+# 🧰 DEV, TESTING & FORMATTING
+# =============================================================
+black==24.8.0
+ruff==0.5.0
+pytest==8.3.0
+pytest-asyncio==0.23.8
+httpx==0.27.0
+factory-boy==3.3.0
+faker==26.0.0
+watchfiles==0.21.0         # File watcher for dev_server.py hot reload
+pytest-cov>=5.0.0          # Coverage measurement + HTML + fail-under enforcement
+allure-pytest>=2.13.0      # Allure reporting integration for pytest
+pytest-timeout>=2.3.1      # Prevent hanging tests (--timeout=30)
+pytest-xdist>=3.5.0        # Parallel test execution (-n auto)
+locust>=2.28.0             # Load/performance testing (run separately)
+schemathesis>=3.26.0       # OpenAPI contract fuzz testing
+
+# =============================================================
+# 🧠 RE-ID / GLOBAL IDENTITY
+# =============================================================
+Cython>=3.0.0            # Required for torchreid fast Cython evaluation
+torchreid==0.2.5         # Install with: pip install torchreid --no-binary :all:
+tensorboard
+faiss-cpu==1.8.0
+Pillow==11.2.1
+gdown==5.2.0
+
+# =============================================================
+# 🤖 SMART QUERY ASSISTANT (AI Intelligence Hub)
+# =============================================================
+sqlparse==0.5.3             # SQL safety validation (SELECT-only enforcement)
+langgraph>=0.2.0            # LangGraph orchestration (Standard + Deep Analysis modes)
+langchain-core>=0.3.0       # LangChain core primitives used by LangGraph
+sentence-transformers>=3.0.0  # Local embeddings for FAISS schema memory (no API key)
+rank-bm25>=0.2.2            # BM25 keyword search for hybrid schema retrieval (FAISS+BM25)
+llama-index-core>=0.10.0    # LlamaIndex core for few-shot SQL example retrieval
+llama-index-embeddings-huggingface>=0.2.0  # HuggingFace embeddings adapter for LlamaIndex

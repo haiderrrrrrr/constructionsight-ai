@@ -1,0 +1,15 @@
+artifact_uri: file:///I:/ConstructionSight AI/ConstructionSight-AI/backend/app/ml/models/yolo_ppe/mlflow/396418372278744513/32b5e45c711548cfbfa3f44c06dace48/artifacts
+end_time: 1761773029023
+entry_point_name: ''
+experiment_id: '396418372278744513'
+lifecycle_stage: active
+run_id: 32b5e45c711548cfbfa3f44c06dace48
+run_name: ppe_FINAL
+run_uuid: 32b5e45c711548cfbfa3f44c06dace48
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1761771929094
+status: 3
+tags: []
+user_id: Haider Ali

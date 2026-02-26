@@ -1,0 +1,25 @@
+/*
+<--!----------------------------------------------------------------!-->
+<--! Settings !-->
+<--!----------------------------------------------------------------!-->
+*/
+
+.cs-btn-nohover.btn-success:hover,
+.cs-btn-nohover.btn-success:focus,
+.cs-btn-nohover.btn-success:active,
+.cs-btn-nohover.btn-success.active,
+.cs-btn-nohover.btn-success:focus-visible {
+	background-color: var(--bs-success) !important;
+	border-color: var(--bs-success) !important;
+	box-shadow: none !important;
+}
+
+.cs-btn-nohover.btn-danger:hover,
+.cs-btn-nohover.btn-danger:focus,
+.cs-btn-nohover.btn-danger:active,
+.cs-btn-nohover.btn-danger.active,
+.cs-btn-nohover.btn-danger:focus-visible {
+	background-color: var(--bs-danger) !important;
+	border-color: var(--bs-danger) !important;
+	box-shadow: none !important;
+}

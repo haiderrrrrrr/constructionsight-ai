@@ -1,0 +1,9 @@
+names:
+- helmet
+- vest
+- Person
+nc: 3
+path: H:\ConstructionSight-AI\data\processed\construction-ppe-crops
+test: images/test
+train: images/train
+val: images/val

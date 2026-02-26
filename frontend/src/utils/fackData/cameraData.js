@@ -1,0 +1,281 @@
+export const cameraTableData = [
+    {
+        id: 1,
+        name: "Main Gate Entrance",
+        site: { name: "Downtown Tower A", id: 1 },
+        vendor: "Hikvision",
+        model: "DS-2CD2185G1",
+        serial_number: "HK-001-A1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        assigned: false,
+    },
+    {
+        id: 2,
+        name: "Level 3 West Scaffold",
+        site: { name: "Downtown Tower A", id: 1 },
+        vendor: "Dahua",
+        model: "IPC-HDW2831T",
+        serial_number: "DH-002-B1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Degraded", color: "badge-soft-warning" },
+        assigned: false,
+    },
+    {
+        id: 3,
+        name: "South Perimeter Fence",
+        site: { name: "Riverside Bridge", id: 2 },
+        vendor: "Axis",
+        model: "P3245-V",
+        serial_number: "AX-003-C1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        assigned: false,
+    },
+    {
+        id: 4,
+        name: "Crane Operator View",
+        site: { name: "Riverside Bridge", id: 2 },
+        vendor: "Hikvision",
+        model: "DS-2CD2T47G2-L",
+        serial_number: "HK-004-D1",
+        registry_status: { content: "Offline", color: "badge-soft-danger" },
+        health_status: { content: "Offline", color: "badge-soft-danger" },
+        assigned: false,
+    },
+    {
+        id: 5,
+        name: "Worker Entry Checkpoint",
+        site: { name: "Northpark Mall Extension", id: 3 },
+        vendor: "Bosch",
+        model: "FLEXIDOME 5100i",
+        serial_number: "BS-005-E1",
+        registry_status: { content: "Draft", color: "badge-soft-secondary" },
+        health_status: null,
+        assigned: false,
+    },
+    {
+        id: 6,
+        name: "Basement Level 2",
+        site: { name: "Northpark Mall Extension", id: 3 },
+        vendor: "Dahua",
+        model: "IPC-HFW1439S1",
+        serial_number: "DH-006-F1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        assigned: false,
+    },
+    {
+        id: 7,
+        name: "Equipment Storage Zone",
+        site: { name: "Harbor Wharf Phase 2", id: 4 },
+        vendor: "Axis",
+        model: "Q6135-LE",
+        serial_number: "AX-007-G1",
+        registry_status: { content: "Verifying", color: "badge-soft-info" },
+        health_status: null,
+        assigned: false,
+    },
+    {
+        id: 8,
+        name: "Main Site Overview PTZ",
+        site: { name: "Harbor Wharf Phase 2", id: 4 },
+        vendor: "Hikvision",
+        model: "DS-2DE4425IWG-E",
+        serial_number: "HK-008-H1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        assigned: false,
+    },
+    {
+        id: 9,
+        name: "North Tower Rooftop",
+        site: { name: "Downtown Tower A", id: 1 },
+        vendor: "Bosch",
+        model: "AUTODOME 5100i",
+        serial_number: "BS-009-I1",
+        registry_status: { content: "Verify Failed", color: "badge-soft-danger" },
+        health_status: null,
+        assigned: false,
+    },
+    {
+        id: 10,
+        name: "Concrete Pour Zone",
+        site: { name: "Riverside Bridge", id: 2 },
+        vendor: "Dahua",
+        model: "IPC-HDW3849H",
+        serial_number: "DH-010-J1",
+        registry_status: { content: "Verified", color: "badge-soft-success" },
+        health_status: { content: "Maintenance", color: "badge-soft-warning" },
+        assigned: false,
+    },
+];
+
+export const cameraHealthData = [
+    // Offline first
+    {
+        id: 4,
+        camera_name: "Crane Operator View",
+        site_name: "Riverside Bridge",
+        health_status: { content: "Offline", color: "badge-soft-danger" },
+        latency_ms: null,
+        checked_at: "2026-03-15T09:12:00Z",
+        alert_count: 3,
+    },
+    // Degraded
+    {
+        id: 2,
+        camera_name: "Level 3 West Scaffold",
+        site_name: "Downtown Tower A",
+        health_status: { content: "Degraded", color: "badge-soft-warning" },
+        latency_ms: 175,
+        checked_at: "2026-03-15T09:14:00Z",
+        alert_count: 1,
+    },
+    // Maintenance
+    {
+        id: 10,
+        camera_name: "Concrete Pour Zone",
+        site_name: "Riverside Bridge",
+        health_status: { content: "Maintenance", color: "badge-soft-warning" },
+        latency_ms: null,
+        checked_at: "2026-03-15T08:00:00Z",
+        alert_count: 0,
+    },
+    // Healthy
+    {
+        id: 1,
+        camera_name: "Main Gate Entrance",
+        site_name: "Downtown Tower A",
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        latency_ms: 32,
+        checked_at: "2026-03-15T09:15:00Z",
+        alert_count: 0,
+    },
+    {
+        id: 3,
+        camera_name: "South Perimeter Fence",
+        site_name: "Riverside Bridge",
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        latency_ms: 28,
+        checked_at: "2026-03-15T09:13:00Z",
+        alert_count: 0,
+    },
+    {
+        id: 6,
+        camera_name: "Basement Level 2",
+        site_name: "Northpark Mall Extension",
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        latency_ms: 41,
+        checked_at: "2026-03-15T09:11:00Z",
+        alert_count: 0,
+    },
+    {
+        id: 8,
+        camera_name: "Main Site Overview PTZ",
+        site_name: "Harbor Wharf Phase 2",
+        health_status: { content: "Healthy", color: "badge-soft-success" },
+        latency_ms: 55,
+        checked_at: "2026-03-15T09:10:00Z",
+        alert_count: 0,
+    },
+];
+
+export const cameraStatsSummary = {
+    total: 10,
+    healthy: 4,
+    degraded: 1,
+    offline: 1,
+    maintenance: 1,
+};
+
+export const cameraVerificationHistory = [
+    {
+        id: 1,
+        started_at: "2026-03-15T09:00:00Z",
+        completed_at: "2026-03-15T09:00:05Z",
+        result_status: "verified",
+        fps_detected: 25.0,
+        resolution_detected: "1920x1080",
+        failure_reason: null,
+    },
+    {
+        id: 2,
+        started_at: "2026-03-10T11:30:00Z",
+        completed_at: "2026-03-10T11:30:08Z",
+        result_status: "verify_failed",
+        fps_detected: null,
+        resolution_detected: null,
+        failure_reason: "RTSP stream unreachable",
+    },
+    {
+        id: 3,
+        started_at: "2026-03-09T08:45:00Z",
+        completed_at: "2026-03-09T08:45:06Z",
+        result_status: "verified",
+        fps_detected: 24.5,
+        resolution_detected: "1280x720",
+        failure_reason: null,
+    },
+];
+
+// ── Site zones + camera zone-polygon mock data ────────────────────────────────
+// Each site can have multiple operational zones.
+// Camera-specific zone polygons are configured per assigned camera view and
+// may represent all or part of those site zones.
+// One camera can have multiple active polygons; different cameras in the same
+// site may cover different zone subsets.
+
+export const siteZones = [
+    { id: 1, site_id: 1, site_name: "Downtown Tower A", name: "Main Entry", zone_type: "entry", description: "Vehicle and personnel entry gate" },
+    { id: 2, site_id: 1, site_name: "Downtown Tower A", name: "Scaffold Level 3", zone_type: "scaffold", description: "West-face scaffold at level 3" },
+    { id: 3, site_id: 1, site_name: "Downtown Tower A", name: "Rooftop Plant", zone_type: "restricted", description: "Crane and plant equipment zone" },
+    { id: 4, site_id: 2, site_name: "Riverside Bridge", name: "South Perimeter", zone_type: "perimeter", description: "Southern fence line" },
+    { id: 5, site_id: 2, site_name: "Riverside Bridge", name: "Concrete Pour Area", zone_type: "hazard", description: "Active concrete pour zone" },
+    { id: 6, site_id: 3, site_name: "Northpark Mall Extension", name: "Worker Checkpoint", zone_type: "entry", description: "Mandatory PPE check point" },
+    { id: 7, site_id: 3, site_name: "Northpark Mall Extension", name: "Basement B2", zone_type: "confined_space", description: "Basement level 2 works" },
+];
+
+// Zone polygons assigned to camera id=1 (Main Gate Entrance @ Downtown Tower A).
+// This camera covers Main Entry (full frame) and a corner of Scaffold Level 3.
+// Points are normalised [0,1] frame coordinates.
+export const cameraZonePolygons = [
+    {
+        id: 1,
+        camera_id: 1,
+        zone_id: 1,
+        zone_name: "Main Entry",
+        site_name: "Downtown Tower A",
+        zone_category: "entry",
+        label: "Full entry view",
+        is_active: 1,
+        version: 1,
+        points: [
+            { x: 0.05, y: 0.08 },
+            { x: 0.95, y: 0.08 },
+            { x: 0.95, y: 0.92 },
+            { x: 0.05, y: 0.92 },
+        ],
+        created_at: "2026-03-10T10:00:00Z",
+        updated_at: "2026-03-10T10:00:00Z",
+    },
+    {
+        id: 2,
+        camera_id: 1,
+        zone_id: 2,
+        zone_name: "Scaffold Level 3",
+        site_name: "Downtown Tower A",
+        zone_category: "scaffold",
+        label: "Scaffold corner (partial)",
+        is_active: 1,
+        version: 2,
+        points: [
+            { x: 0.60, y: 0.10 },
+            { x: 0.95, y: 0.10 },
+            { x: 0.95, y: 0.45 },
+            { x: 0.60, y: 0.45 },
+        ],
+        created_at: "2026-03-12T09:15:00Z",
+        updated_at: "2026-03-14T11:30:00Z",
+    },
+];

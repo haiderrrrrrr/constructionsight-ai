@@ -1,0 +1,39 @@
+[
+  {
+    "run_id": "2025-10-30_02-03-33_PPE",
+    "mAP50": 0.2829134018041526,
+    "mAP5095": 0.11323246737680402,
+    "precision": 0.7125038044211729,
+    "recall": 0.23516506049320451
+  },
+  {
+    "run_id": "2025-10-30_06-05-20_PPE",
+    "mAP50": 0.5479241469062165,
+    "mAP5095": 0.2747828679299833,
+    "precision": 0.5819679933828449,
+    "recall": 0.5224128425607765
+  },
+  {
+    "run_id": "2026-03-28_15-43-38_PPE_STAGE2",
+    "stage": "Stage 2 crop PPE detector",
+    "model": "yolo11s",
+    "imgsz": 224,
+    "classes": [
+      "helmet",
+      "vest",
+      "Person"
+    ],
+    "per_class_ap50": {
+      "helmet": 0.8778,
+      "vest": 0.8272,
+      "Person": 0.995
+    },
+    "test_mAP50": 0.9,
+    "test_mAP5095": 0.6476,
+    "test_precision": 0.9059,
+    "test_recall": 0.8518,
+    "val_mAP50": 0.8399,
+    "val_mAP5095": 0.6238,
+    "violation_logic": "no helmet in crop = NO HELMET | no vest in crop = NO VEST"
+  }
+]
